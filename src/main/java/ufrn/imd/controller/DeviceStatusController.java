@@ -18,14 +18,13 @@ import ufrn.imd.model.DeviceStatus;
 import ufrn.imd.service.DeviceStatusService;
 
 @RestController
-@RequestMapping("/database/devices-status")
+@RequestMapping("/device-status/devices")
 public class DeviceStatusController {
-	
+	@Autowired
 	private final DeviceStatusService deviceStatusService;
 
-	@Autowired
 	public DeviceStatusController(DeviceStatusService deviceStatusService) {
-		this.deviceStatusService = deviceStatusService;
+		this.deviceStatusService = deviceStatusService;	
 	}
 	
 	//Create
