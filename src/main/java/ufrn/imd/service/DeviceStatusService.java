@@ -20,8 +20,8 @@ public class DeviceStatusService {
     }
 	
     //Create
-	public DeviceStatus createDevice(DeviceStatus deviceStatus) {
-        return deviceStatusRepository.save(deviceStatus);
+	public DeviceStatus createDevice(boolean lightStatus, Double thermostat) {
+        return deviceStatusRepository.save(new DeviceStatus(lightStatus, thermostat));
     }
 	
 	//Read
@@ -35,10 +35,10 @@ public class DeviceStatusService {
 	}
 	
 	//Update
-	public Optional<DeviceStatus> updateDeviceStatus(Long id, DeviceStatus deviceStatus) {
+	public Optional<DeviceStatus> updateDeviceStatus(Long id, boolean lightStatus, Double thermostat) {
         return deviceStatusRepository.findById(id).map(device -> {
-        	device.setLightStatus(deviceStatus.isLightStatus());
-        	device.setThermostat(deviceStatus.getThermostat());
+        	device.setLightStatus(lightStatus);
+        	device.setThermostat(thermostat);
             return deviceStatusRepository.save(device);
         });
     }

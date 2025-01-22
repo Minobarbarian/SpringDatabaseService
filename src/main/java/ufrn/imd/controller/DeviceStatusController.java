@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import ufrn.imd.model.DeviceStatus;
@@ -29,8 +30,8 @@ public class DeviceStatusController {
 	
 	//Create
 	@PostMapping
-	public ResponseEntity<DeviceStatus> createDevice(@RequestBody DeviceStatus deviceStatus) {
-		DeviceStatus created = deviceStatusService.createDevice(deviceStatus);
+	public ResponseEntity<DeviceStatus> createDevice(@RequestParam boolean lightStatus, @RequestParam double thermostat) {
+		DeviceStatus created = deviceStatusService.createDevice(lightStatus, thermostat);
         return ResponseEntity.ok(created);
     }
 	
@@ -51,8 +52,8 @@ public class DeviceStatusController {
 	
 	//Update
 	@PutMapping("/{id}")
-    public ResponseEntity<DeviceStatus> updateDeviceStatus(@PathVariable Long id, @RequestBody DeviceStatus deviceStatus) {
-        Optional<DeviceStatus> updated = deviceStatusService.updateDeviceStatus(id, deviceStatus);
+    public ResponseEntity<DeviceStatus> updateDeviceStatus(@PathVariable Long id, @RequestParam boolean lightStatus, @RequestParam double thermostat) {
+        Optional<DeviceStatus> updated = deviceStatusService.updateDeviceStatus(id, lightStatus, thermostat);
         return updated.map(ResponseEntity::ok)
                       .orElseGet(() -> ResponseEntity.notFound().build());
     }
